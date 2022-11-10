@@ -38,7 +38,7 @@ void AudioPlugin::processSamples(AudioBuffer<T> &audioBuffer, MidiBuffer &midiBu
         }
         
         float sample_wet = delay_buffer[play_head];
-        delay_buffer[play_head] = sample_dry;
+        delay_buffer[play_head] = sample_dry + (sample_wet * delay_gain->get());
 
         play_head = (play_head + 1) % (size_t)(delay_time->get() * (getSampleRate() / 1000.0));
 
