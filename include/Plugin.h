@@ -23,7 +23,7 @@ public:
     bool hasEditor() const override                        { return true;   }
 
     //==============================================================================
-    const String getName() const override                  { return "Audio PlugIn"; }
+    const String getName() const override                  { return "MGUDelay"; }
     bool acceptsMidi() const override                      { return false; }
     bool producesMidi() const override                     { return false; }
     double getTailLengthSeconds() const override           { return 0; }
@@ -51,7 +51,10 @@ public:
 
 private:
     //==============================================================================
-    AudioParameterFloat* gain;
+    AudioParameterFloat* delay_gain;
+    AudioParameterFloat* delay_time;
+    float delay_buffer[192000];
+    size_t play_head = 0;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPlugin)
